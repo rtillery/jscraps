@@ -1,0 +1,538 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">
+<title>JSCraps</title>
+<style type="text/css">
+html {
+    width: 100%;
+    height: 100%;
+}
+body {
+    width: 100vw;
+    height: 56.25vw;
+    font-size: 1.5vw;
+    font-family: "Times New Roman" Times serif;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    background-color: darkgreen;
+    color: yellow;
+    margin: 0;
+    padding: 0;
+    border-width: 0;
+}
+.layout {
+    width: 100%;
+    height: 100%;
+    border-width: 0;
+    border-spacing: 0;
+}
+td {
+/*    border: 0.125vw solid black; */
+}
+.row1x {
+    height: 4.16%;
+}
+.row2x {
+    height: 8.33%;
+}
+.row6x {
+    height: 25%;
+}
+.row7x {
+    height: 29.16%;
+}
+.row22x {
+    height: 91.66%;
+}
+.col1x {
+    width: 2.5%;
+}
+.col2x {
+    width: 5%;
+}
+.col4x {
+    width: 10%;
+}
+.col5x {
+    width: 12.5%;
+}
+.col6x {
+    width: 15%;
+}
+.col8x {
+    width: 20%;
+}
+.col9x {
+    width: 22.5%;
+}
+.col10x {
+    width: 25%;
+}
+.col14x {
+    width: 35%;
+}
+.col19x {
+    width: 47.5%
+}
+.col23x {
+    width: 57.5%;
+}
+.col37x {
+    width: 92.5%;
+}
+.lastrolllabel {
+    background-color: black;
+    color: white;
+    text-align: left;
+}
+#roll0 {
+    border: 0.25vw solid lightblue;
+}
+.rollhistory {
+    background-color: black;
+    color: white;
+}
+.valuetop, .valuebottom {
+    font-family: sans-serif;
+    border: 0.25vw solid black;
+    background-color: blue;
+}
+.valuetop {
+    border-bottom: 0;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+}
+.valuebottom {
+    border-top: 0;
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+}
+.chipvaluetop, .chipvaluebottom {
+    font-family: sans-serif;
+    border: 0.25vw solid black;
+    background-color: darkred;
+}
+.chipvaluetop {
+    border-bottom: 0;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+}
+.chipvaluebottom {
+    border-top: 0;
+    border-bottom-left-radius: 1vw;
+    border-bottom-right-radius: 1vw;
+}
+#hopbutton {
+    width: 100%;
+    height: 100%;
+	box-shadow: inset 0px 1px 0px 0px #cf866c;
+	background: linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+	background-color: #d0451b;
+	border-radius: 1vw;
+	border: 2px solid #942911;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: sans-serif;
+	font-size: 100%;
+	text-decoration: none;
+	text-shadow: 0 0.25vw 0 #854629;
+}
+#dontcomebar {
+    color: black;
+    font-size: 175%;
+    padding: 0;
+    border: 0.125vw solid white;
+    border-left-width: 0.75vw;
+    border-top-width: 0.75vw;
+    border-top-left-radius: 3vw;
+}
+#blankreddie {
+    fill: red;
+}
+#blankblackdie {
+    fill: black;
+}
+#whitedot {
+    fill: white;
+}
+#cleardot {
+    fill: darkgreen;
+}
+.dontplace, .lay, .place, .buy {
+    color: black;
+    border: 0.125vw solid white;
+}
+.dontplace, .lay {
+    border-top-width: 0.75vw;
+}
+#buy9, #place10, #buy10 {
+    border-bottom-width: 0.75vw;
+}
+#buy10 {
+    border-right-width: 0.75vw;
+    border-bottom-right-radius: 3vw;
+}
+#lay10 {
+    border-right-width: 0.75vw;
+    border-top-right-radius: 3vw;
+}
+.hardwayslabel {
+    background-color: limegreen;
+    color: black;
+    border: 0.75vw solid white;
+    border-bottom: 0.125vw solid white;
+    border-top-left-radius: 3vw;
+    border-top-right-radius: 3vw;
+}
+.hardway {
+    color: white;
+    border: 0.125vw solid white;
+}
+#hard4, #hard6 {
+    border-left-width: 0.75vw;
+}
+#hard8, #hard10 {
+    border-right-width: 0.75vw;
+}
+#hard4, #hard10 {
+    border-bottom-width: 0.75vw;
+}
+#hard4 {
+    border-bottom-left-radius: 3vw;
+}
+#hard10 {
+    border-bottom-right-radius: 3vw;
+}
+.point {
+    border: 0.125vw solid white;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#four {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><text x='50' y='50' font-size='90' font-weight='bold' fill='yellow' text-anchor='middle'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>4</tspan></text></svg>");
+}
+#five {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><text x='50' y='50' font-size='90' font-weight='bold' fill='yellow' text-anchor='middle'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>5</tspan></text></svg>");
+}
+#six {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><defs><path id='sixpath' d='M0 75l100 -50'/></defs><text x='55' y='50' font-size='50' font-weight='bold' fill='yellow' text-anchor='middle'><textPath xlink:href='%23sixpath'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>SIX</tspan></textPath></text></svg>");
+}
+#eight {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><text x='50' y='50' font-size='90' font-weight='bold' fill='yellow' text-anchor='middle'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>8</tspan></text></svg>");
+}
+#nine {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><defs><path id='ninepath' d='M0 75l100 -50'/></defs><text x='55' y='50' font-size='35' font-weight='bold' fill='yellow' text-anchor='middle'><textPath xlink:href='%23ninepath'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>NINE</tspan></textPath></text></svg>");
+}
+#ten {
+    border-right-width: 0.75vw;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 100'><text x='50' y='50' font-size='90' font-weight='bold' fill='yellow' text-anchor='middle'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>10</tspan></text></svg>");
+}
+#come {
+    padding: 0;
+    border: 0.125vw solid white;
+    border-left-width: 0.75vw;
+    border-right-width: 0.75vw;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 2300 300'><text x='766 ' y='150' font-size='280' font-weight='bold' fill='red' text-anchor='middle' transform='matrix(1.5,0,0,1,0,0)'><tspan font-family='Times New Roman, Times, serif' alignment-baseline='central'>COME</tspan></text></svg>");
+}
+</style>
+</head>
+<body>
+<table class="layout">
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll0" colspan="2" rowspan="2">00</td>
+        <td class="col5x row2x lastrolllabel" colspan="5" rowspan="2">:Last Roll</td>
+        <td class="col1x row2x" rowspan="2"></td>
+        <td class="col4x row1x valuetop" colspan="4">WIN</td>
+        <td class="col1x row2x" rowspan="2"></td>
+        <td class="col4x row1x valuetop" colspan="4">BET TOTAL</td>
+        <td class="col1x row2x" rowspan="2"></td>
+        <td class="col4x row1x chipvaluetop" colspan="4">CHIP VAL</td>
+        <td class="col1x row2x" rowspan="2"></td>
+        <td class="col8x row1x valuetop" colspan="8">CREDITS</td>
+        <td class="col2x row2x" colspan="2" rowspan="2"></td>
+        <td class="col6x row2x" colspan="6" rowspan="2"><button style="width:100%; height: 100%;" id="hopbutton">HOP BETS</button></td>
+        <td class="col1x row2x" rowspan="2"></td>
+    </tr>
+    <tr>
+        <td class="col4x row1x valuebottom" colspan="4" id="winval">$0</td>
+        <td class="col4x row1x valuebottom" colspan="4" id="betval">$0</td>
+        <td class="col4x row1x chipvaluebottom" colspan="4" id="chipval">$0</td>
+        <td class="col8x row1x valuebottom" colspan="8" id="creditsval">$0</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-1" colspan="2" rowspan="2">20</td>
+        <td class="col1x row22x" rowspan="22"></td>
+        <td class="col37x row1x" colspan="37"></td>
+    </tr>
+    <tr>
+        <td class="col4x row7x" id="dontcomebar" colspan="4" rowspan="7">
+            Don't COME Bar<br/>
+            <svg width="2ex" height="2ex" viewBox="0 0 101 101"><use xlink:href="#blackdie6"/></svg>
+            <svg width="2ex" height="2ex" viewBox="0 0 101 101"><use xlink:href="#blackdie6"/></svg>
+        </td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace4">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay4">Lay</td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace5">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay5">Lay</td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace6">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay6">Lay</td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace8">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay8">Lay</td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace9">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay9">Lay</td>
+        <td class="col2x row2x dontplace" colspan="2" rowspan="2" id="dontplace10">Don't Place</td>
+        <td class="col2x row2x lay" colspan="2" rowspan="2" id="lay10">Lay</td>
+        <td class="col1x row7x" rowspan="7"></td>
+        <td class="col8x row1x hardwayslabel" colspan="8">HARDWAYS</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-2" colspan="2" rowspan="2">40</td>
+        <td class="col4x row3x hardway" colspan="4" rowspan="3" id="hard6">
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie3"/></svg>
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie3"/></svg><br/>
+            9 to 1
+        </td>
+        <td class="col4x row3x hardway" colspan="4" rowspan="3" id="hard8">
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie4"/></svg>
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie4"/></svg><br/>
+            9 to 1
+        </td>
+    </tr>
+    <tr>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="four"></td>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="five"></td>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="six"></td>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="eight"></td>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="nine"></td>
+        <td class="col4x row3x point" colspan="4" rowspan="3" id="ten"></td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-3" colspan="2" rowspan="2">60</td>
+    </tr>
+    <tr>
+        <td class="col4x row3x hardway" colspan="4" rowspan="3" id="hard4">
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie2"/></svg>
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie2"/></svg><br/>
+            9 to 1
+        </td>
+        <td class="col4x row3x hardway" colspan="4" rowspan="3" id="hard10">
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie5"/></svg>
+            <svg width="3ex" height="3ex" viewBox="0 0 101 101"><use xlink:href="#reddie5"/></svg><br/>
+            9 to 1
+        </td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-4" colspan="2" rowspan="2">80</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place4">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy4">Buy</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place5">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy5">Buy</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place6">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy6">Buy</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place8">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy8">Buy</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place9">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy9">Buy</td>
+        <td class="col2x row2x place" colspan="2" rowspan="2" id="place10">Place</td>
+        <td class="col2x row2x buy" colspan="2" rowspan="2" id="buy10">Buy</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-5" colspan="2" rowspan="2">a0</td>
+        <td class="col23x row3x" colspan="23" rowspan="3" id="come"></td>
+        <td class="col14x row1x" colspan="14"></td>
+    </tr>
+    <tr>
+        <td class="col4x row1x" colspan="4">b0</td>
+        <td class="col10x row1x" colspan="10">b1</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-6" colspan="2" rowspan="2">c0</td>
+        <td class="col1x row8x" rowspan="8">c1</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">c2</td>
+        <td class="col1x row8x" rowspan="8">c3</td>
+        <td class="col10x row2x" colspan="10" rowspan="2">c4</td>
+    </tr>
+    <tr>
+        <td class="col4x row5x" colspan="4" rowspan="5">d0</td>
+        <td class="col19x row3x" colspan="19" rowspan="3">d1</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-7" colspan="2" rowspan="2">e0</td>
+        <td class="col2x row1x" colspan="2">e1</td>
+        <td class="col5x row3x" colspan="5" rowspan="3">e2</td>
+        <td class="col5x row3x" colspan="5" rowspan="3">e3</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x" colspan="2" rowspan="2">f0</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-8" colspan="2" rowspan="2">g0</td>
+        <td class="col19x row2x" colspan="19" rowspan="2">g1</td>
+    </tr>
+    <tr>
+        <td class="col2x row1x" colspan="2">h0</td>
+        <td class="col5x row3x" colspan="5" rowspan="3">h1</td>
+        <td class="col5x row3x" colspan="5" rowspan="3">h2</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-9" colspan="2" rowspan="2">i0</td>
+        <td class="col23x row3x" colspan="23" rowspan="3">i1</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">i2</td>
+    </tr>
+    <tr></tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-10" colspan="2" rowspan="2">k0</td>
+        <td class="col4x row2x" colspan="4" rowspan="2">k1</td>
+        <td class="col10x row2x" colspan="10" rowspan="2">k2</td>
+    </tr>
+    <tr>
+        <td class="col23x row1x" colspan="23">l0</td>
+    </tr>
+    <tr>
+        <td class="col2x row2x rollhistory" id="roll-11" colspan="2" rowspan="2">m0</td>
+        <td class="col4x row2x" colspan="4" rowspan="2">m1</td>
+        <td class="col1x row2x" rowspan="2">m2</td>
+        <td class="col9x row2x" colspan="9" rowspan="2">m3</td>
+        <td class="col1x row2x" rowspan="2">m4</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">m5</td>
+        <td class="col1x row2x" rowspan="2">m6</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">m7</td>
+        <td class="col1x row2x" rowspan="2">m8</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">m9</td>
+        <td class="col1x row2x" rowspan="2">ma</td>
+        <td class="col2x row2x" colspan="2" rowspan="2">mb</td>
+        <td class="col1x row2x" rowspan="2">mc</td>
+        <td class="col10x row1x" colspan="10">md</td>
+    </tr>
+    <tr>
+        <td class="col10x row1x" colspan="10">n0</td>
+    </tr>
+</table>
+<svg width="0" height="0">
+    <defs>
+        <path id="blankdie"
+              style="stroke: none;
+                     fill: red;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15Z"/>
+        <g id="blankreddie">
+            <use xlink:href="#blankdie"/>
+        </g>
+        <g id="blankblackdie">
+            <use xlink:href="#blankdie"/>
+        </g>
+        <circle id="dot" r="10"/>
+        <g id="whitedot">
+            <use xlink:href="#dot"/>
+        </g>
+        <g id="cleardot">
+            <use xlink:href="#dot"/>
+        </g>
+        <g id="1whitedot">
+            <use x="50" y="50" xlink:href="#whitedot"/>
+        </g>
+        <g id="23whitedots">
+            <use x="25" y="25" xlink:href="#whitedot"/>
+            <use x="75" y="75" xlink:href="#whitedot"/>
+        </g>
+        <g id="45whitedots">
+            <use x="75" y="25" xlink:href="#whitedot"/>
+            <use x="25" y="75" xlink:href="#whitedot"/>
+        </g>
+        <g id="6whitedots">
+            <use x="25" y="50" xlink:href="#whitedot"/>
+            <use x="75" y="50" xlink:href="#whitedot"/>
+        </g>
+        <g id="reddie1">
+            <use xlink:href="#blankreddie"/>
+            <use xlink:href="#1whitedot"/>
+        </g>
+        <g id="reddie2">
+            <use xlink:href="#blankreddie"/>
+            <use xlink:href="#23whitedots"/>
+        </g>
+        <g id="reddie3">
+            <use xlink:href="#reddie1"/>
+            <use xlink:href="#23whitedots"/>
+        </g>
+        <g id="reddie4">
+            <use xlink:href="#reddie2"/>
+            <use xlink:href="#45whitedots"/>
+        </g>
+        <g id="reddie5">
+            <use xlink:href="#reddie3"/>
+            <use xlink:href="#45whitedots"/>
+        </g>
+        <g id="reddie6">
+            <use xlink:href="#reddie4"/>
+            <use xlink:href="#6whitedots"/>
+        </g>
+        <g id="whitedot">
+            <use xlink:href="#dot"/>
+        </g>
+        <path id="blackdie1"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+        <path id="blackdie2"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+        <path id="blackdie3"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+        <path id="blackdie4"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+        <path id="blackdie5"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+        <path id="blackdie6"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z"/>
+    </defs>
+</svg>
+</body>
+</html>
