@@ -1,40 +1,248 @@
 <html>
 <style>
-.col {
-width: 25%;
-}
-#test {
-    height: 200px;
+body {
+    width: 100%;
+    height: 100%;
     background-color: green;
-    background-image: url(file:///home/rtillery/personal/jscraps/svg/4.svg);
+}
+.num {
+    height: 100px;
+    background-color: green;
+    width: 14%;
     background-repeat: no-repeat;
     background-position: center; 
 }
+#four {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>4</text></svg>");
+}
+#five {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>5</text></svg>");
+}
+#six {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 300 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>SIX</text></svg>");
+}
+#eight {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>8</text></svg>");
+}
+#nine {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 400 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>NINE</text></svg>");
+}
+#ten {
+    background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' viewBox='0 0 100 200'><text x='0' y='1em' font-family='serif' font-size='150em' fill='yellow'>10</text></svg>");
+}
+.dontcomept, .dontcomeptodds, .comept, .comeptodds {
+    width: 50%;
+}
+.pt {
+    text-align: left;
+    width: 100%;
+    height: 100%;
+    border: 1px solid red;
+    padding: 0;
+    border-spacing: 0;
+}
+.ptrow {
+    border: 1px solid yellow;
+    border-spacing: 0;
+    text-align: left;
+    width: 100%;
+    padding: 0;
+}
+.dontplace, .lay, .place, .buy {
+    width: 7%;
+    border: 1px solid black;
+    padding: 0;
+    border-spacing: 0;
+}
 </style>
 <body>
-<table style="text-align: left; width: 22%;" border="1"
- cellpadding="2" cellspacing="0">
+<table style="width: 100%;">
   <tbody>
-    <tr>
-      <td class="col"></td>
-      <td class="col"></td>
-      <td class="col"></td>
-      <td class="col"></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td colspan="2" rowspan="2" id="test"></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+    <tr style="height: 100%;">
+      <td style="width: 77%;">
+        <table class="ptrow">
+          <tbody>
+            <tr>
+              <td rowspan="4"
+                  style="width: 8%;">Don't<br/>Pass<br/>Bar
+              </td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+              <td class="dontplace">Don't Place</td>
+              <td class="lay">Lay</td>
+            </tr>
+            <tr>
+              <td class="num"
+                  id="four"
+                  colspan="2">
+                <table class="pt">
+                  <tbody>
+                    <tr>
+                      <td class="dontcomept" id="dontcome4"></td>
+                      <td class="dontcomeptodds" id="dontcome4odds"></td>
+                    </tr>
+                    <tr>
+                      <td class="comept" id="come4"></td>
+                      <td class="comeptodds" id="come4odds"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td class="num"
+                  id="five"
+                  colspan="2">
+                <table class="pt">
+                  <tbody>
+                    <tr>
+                      <td class="dontcomept" id="dontcome5"></td>
+                      <td class="dontcomeptodds" id="dontcome5odds"></td>
+                    </tr>
+                    <tr>
+                      <td class="comept" id="come5"></td>
+                      <td class="comeptodds" id="come5odds"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+              <td class="num"
+                  id="six"
+                  colspan="2">
+                <table class="pt">
+                  <tbody>
+                    <tr>
+                      <td class="dontcomept" id="dontcome6"></td>
+                      <td class="dontcomeptodds" id="dontcome6odds"></td>
+                    </tr>
+                    <tr>
+                      <td class="comept" id="come6"></td>
+                      <td class="comeptodds" id="come6odds"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            <td colspan="2"
+                style="width: 14%;">
+            <table style="text-align: left;
+                          width: 100%;
+                          height: 100%;"
+                   border="0"
+                   cellpadding="0"
+                   cellspacing="0">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
+            <td colspan="2"
+                style="width: 14%;">
+            <table style="text-align: left;
+                          width: 100%;
+                          height: 100%;"
+                   border="0"
+                   cellpadding="0"
+                   cellspacing="0">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
+            <td colspan="2"
+                style="width: 14%;">
+            <table style="text-align: left;
+                          width: 100%;
+                          height: 100%;"
+                   border="0"
+                   cellpadding="0"
+                   cellspacing="0">
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+            </td>
+          </tr>
+          <tr>
+          </tr>
+          <tr style="height: 25%;">
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+              <td class="place">Place</td>
+              <td class="buy">Buy</td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
+      <td style="width: 22%;">
+      <table style="text-align: left; width: 100%;" border="1"
+ cellpadding="2" cellspacing="0">
+        <tbody>
+          <tr>
+            <td colspan="4" rowspan="1"
+ style="width: 25%;"></td>
+          </tr>
+          <tr>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+          </tr>
+          <tr>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+            <td style="width: 25%;"></td>
+          </tr>
+        </tbody>
+      </table>
+      </td>
     </tr>
   </tbody>
 </table>
