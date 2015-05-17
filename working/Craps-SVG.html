@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
+    <title>JSCraps</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+}
+svg {
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-color: darkgreen;
+    display:block;
+    position: absolute;
+}
+rect {
+    fill: transparent;
+    stroke: white;
+    stroke-width: 2;
+}
+#board {
+    fill: green;
+    stroke-width: 0;
+}
+[id^='dontcomeodds'], [id^='comeodds'] {
+    stroke-width: 0;
+}
+[id^='roll-'], #lastrolllabel {
+    fill: black;
+    stroke: black;
+    stroke-width: 1;
+}
+.dontlabel {
+    fill: black;
+    font-weight: bold;
+}
+</style>
+</head>
+<svg>
+    <defs>
+        <path id="blankdie"
+              style="stroke: none;
+                     fill: red;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15Z" />
+        <g id="blankreddie">
+            <use xlink:href="#blankdie" />
+        </g>
+        <g id="blankblackdie">
+            <use xlink:href="#blankdie" />
+        </g>
+        <circle id="dot" r="10" />
+        <g id="whitedot">
+            <use xlink:href="#dot" />
+        </g>
+        <g id="cleardot">
+            <use xlink:href="#dot" />
+        </g>
+        <g id="1whitedot">
+            <use x="50" y="50" xlink:href="#whitedot" />
+        </g>
+        <g id="23whitedots">
+            <use x="25" y="25" xlink:href="#whitedot" />
+            <use x="75" y="75" xlink:href="#whitedot" />
+        </g>
+        <g id="45whitedots">
+            <use x="75" y="25" xlink:href="#whitedot" />
+            <use x="25" y="75" xlink:href="#whitedot" />
+        </g>
+        <g id="6whitedots">
+            <use x="25" y="50" xlink:href="#whitedot" />
+            <use x="75" y="50" xlink:href="#whitedot" />
+        </g>
+        <g id="reddie1">
+            <use xlink:href="#blankreddie" />
+            <use xlink:href="#1whitedot" />
+        </g>
+        <g id="reddie2">
+            <use xlink:href="#blankreddie" />
+            <use xlink:href="#23whitedots" />
+        </g>
+        <g id="reddie3">
+            <use xlink:href="#reddie1" />
+            <use xlink:href="#23whitedots" />
+        </g>
+        <g id="reddie4">
+            <use xlink:href="#reddie2" />
+            <use xlink:href="#45whitedots" />
+        </g>
+        <g id="reddie5">
+            <use xlink:href="#reddie3" />
+            <use xlink:href="#45whitedots" />
+        </g>
+        <g id="reddie6">
+            <use xlink:href="#reddie4" />
+            <use xlink:href="#6whitedots" />
+        </g>
+        <g id="whitedot">
+            <use xlink:href="#dot" />
+        </g>
+        <path id="blackdie1"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z" />
+        <path id="blackdie2"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z" />
+        <path id="blackdie3"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;" d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z" />
+        <path id="blackdie4"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z" />
+        <path id="blackdie5"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,15l0,70a15,15 0 0,0 15,15l70,0a15,15 0 0,0 15,-15l0,-70a15,15 0 0,0 -15,-15l-70,0a15,15 0 0,0 -15,15
+                 M15,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M15,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,25a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M65,75a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 M40,50a10,10 0 0,0 20,0a10,10 0 0,0 -20,0
+                 Z" />
+        <path id="blackdie6"
+              style="stroke: none;
+                     fill: black;
+                     fill-rule: evenodd;"
+              d="M0,3l0,14a3,3 0 0,0 3,3l14,0a3,3 0 0,0 3,-3l0,-14a3,3 0 0,0 -3,-3l-14,0a3,3 0 0,0 -3,3
+                 M3,5a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 M3,10a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 M3,15a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 M13,5a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 M13,10a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 M13,15a2,2 0 0,0 4,0a2,2 0 0,0 -4,0
+                 Z" />
+    </defs>
+</svg>
+<body>
+    <svg viewBox='0 0 840 540'>
+        <rect id='board' x='0' y='0' width='840' height='540'/>
+
+        <rect id='lastrolllabel' x='60' y='20' width='80' height='40'/>
+        <rect id='roll-0' x='20' y='20' width='40' height='40'/>
+        <rect id='roll-1' x='20' y='60' width='40' height='40'/>
+        <rect id='roll-2' x='20' y='100' width='40' height='40'/>
+        <rect id='roll-3' x='20' y='140' width='40' height='40'/>
+        <rect id='roll-4' x='20' y='180' width='40' height='40'/>
+        <rect id='roll-5' x='20' y='220' width='40' height='40'/>
+        <rect id='roll-6' x='20' y='260' width='40' height='40'/>
+        <rect id='roll-7' x='20' y='300' width='40' height='40'/>
+        <rect id='roll-8' x='20' y='340' width='40' height='40'/>
+        <rect id='roll-9' x='20' y='380' width='40' height='40'/>
+        <rect id='roll-10' x='20' y='420' width='40' height='40'/>
+        <rect id='roll-11' x='20' y='460' width='40' height='40'/>
+        <rect id='roll-12' x='20' y='500' width='40' height='40'/>
+
+        <rect id='winnings' x='160' y='20' width='80' height='40'/>
+        <rect id='bets' x='260' y='20' width='80' height='40'/>
+        <rect id='wager' x='360' y='20' width='80' height='40'/>
+        <rect id='credits' x='460' y='20' width='80' height='40'/>
+        <rect id='hopbets' x='560' y='20' width='80' height='40'/>
+
+        <text class='dontlabel' x='123' y='124' font-size='24' text-anchor='middle'>
+            Don't
+            <tspan x='123' y='148'>COME</tspan>
+            <tspan x='123' y='172'>Bar</tspan>
+        </text>
+        <use x='97' y='180' xlink:href='#blackdie6'/>
+        <use x='122' y='180' xlink:href='#blackdie6'/>
+        <rect id='dontcome' x='80' y='80' width='80' height='160'/>
+
+        <rect id='dontplace4' x='160' y='80' width='40' height='40'/>
+        <rect id='lay4' x='200' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds4' x='160' y='120' width='80' height='40'/>
+        <rect id='comeodds4' x='160' y='160' width='80' height='40'/>
+        <rect x='160' y='120' width='80' height='80'/>
+        <rect id='place4' x='160' y='200' width='40' height='40'/>
+        <rect id='buy4' x='200' y='200' width='40' height='40'/>
+
+        <rect id='dontplace5' x='240' y='80' width='40' height='40'/>
+        <rect id='lay5' x='280' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds5' x='240' y='120' width='80' height='40'/>
+        <rect id='comeodds5' x='240' y='160' width='80' height='40'/>
+        <rect x='240' y='120' width='80' height='80'/>
+        <rect id='place5' x='240' y='200' width='40' height='40'/>
+        <rect id='buy5' x='280' y='200' width='40' height='40'/>
+
+        <rect id='dontplace6' x='320' y='80' width='40' height='40'/>
+        <rect id='lay6' x='360' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds6' x='320' y='120' width='80' height='40'/>
+        <rect id='comeodds6' x='320' y='160' width='80' height='40'/>
+        <rect x='320' y='120' width='80' height='80'/>
+        <rect id='place6' x='320' y='200' width='40' height='40'/>
+        <rect id='buy6' x='360' y='200' width='40' height='40'/>
+
+        <rect id='dontplace8' x='400' y='80' width='40' height='40'/>
+        <rect id='lay8' x='440' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds8' x='400' y='120' width='80' height='40'/>
+        <rect id='comeodds8' x='400' y='160' width='80' height='40'/>
+        <rect x='400' y='120' width='80' height='80'/>
+        <rect id='place8' x='400' y='200' width='40' height='40'/>
+        <rect id='buy8' x='440' y='200' width='40' height='40'/>
+
+        <rect id='dontplace9' x='480' y='80' width='40' height='40'/>
+        <rect id='lay9' x='520' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds9' x='480' y='120' width='80' height='40'/>
+        <rect id='comeodds9' x='480' y='160' width='80' height='40'/>
+        <rect x='480' y='120' width='80' height='80'/>
+        <rect id='place9' x='480' y='200' width='40' height='40'/>
+        <rect id='buy9' x='520' y='200' width='40' height='40'/>
+
+        <rect id='dontplace10' x='560' y='80' width='40' height='40'/>
+        <rect id='lay10' x='600' y='80' width='40' height='40'/>
+        <rect id='dontcomeodds10' x='560' y='120' width='80' height='40'/>
+        <rect id='comeodds10' x='560' y='160' width='80' height='40'/>
+        <rect x='560' y='120' width='80' height='80'/>
+        <rect id='place10' x='560' y='200' width='40' height='40'/>
+        <rect id='buy10' x='600' y='200' width='40' height='40'/>
+
+        <rect id='come' x='80' y='240' width='480' height='60'/>
+
+        <rect id='big6' x='80' y='300' width='40' height='100'/>
+        <rect id='big8' x='120' y='300' width='40' height='100'/>
+        <rect id='field' x='160' y='300' width='400' height='60'/>
+        <rect id='dontpass' x='160' y='360' width='280' height='40'/>
+        <rect id='dontpassodds' x='440' y='360' width='120' height='40'/>
+
+        <rect id='pass' x='80' y='400' width='360' height='60'/>
+        <rect id='passodds' x='440' y='400' width='120' height='60'/>
+
+        <rect id='c' x='580' y='280' width='40' height='40'/>
+        <rect id='cande' x='580' y='340' width='40' height='40'/>
+        <rect id='e' x='580' y='400' width='40' height='40'/>
+
+        <rect x='660' y='80' width='160' height='20'/>
+        <rect id='hard6' x='660' y='100' width='80' height='60'/>
+        <rect id='hard8' x='740' y='100' width='80' height='60'/>
+        <rect id='hard4' x='660' y='160' width='80' height='60'/>
+        <rect id='hard10' x='740' y='160' width='80' height='60'/>
+
+        <rect x='640' y='240' width='180' height='20'/>
+        <rect id='anyseven' x='640' y='260' width='180' height='40'/>
+        <rect id='snakeeyes' x='640' y='300' width='90' height='60'/>
+        <rect id='boxcars' x='730' y='300' width='90' height='60'/>
+        <rect id='craps3' x='640' y='360' width='90' height='60'/>
+        <rect id='yo11' x='730' y='360' width='90' height='60'/>
+        <rect id='anycraps' x='640' y='420' width='180' height='40'/>
+        <rect id='horn' x='700' y='330' width='60' height='60'/>
+
+        <rect id='minmax' x='80' y='480' width='80' height='40'/>
+        <rect id='chip1' x='180' y='480' width='40' height='40'/>
+        <rect id='chip5' x='240' y='480' width='40' height='40'/>
+        <rect id='chip25' x='300' y='480' width='40' height='40'/>
+        <rect id='chip100' x='360' y='480' width='40' height='40'/>
+        <rect id='onoff' x='420' y='480' width='80' height='40'/>
+        <rect id='clear' x='520' y='480' width='80' height='40'/>
+        <rect id='roll' x='620' y='480' width='80' height='40'/>
+    </svg>
+</body>
